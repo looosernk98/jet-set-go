@@ -37,13 +37,13 @@ const FlightSearchForm = () => {
 
   const handleSearch = (e) => {
     e.preventDefault()
-    dispatch(flightActions.searchFlightList({ source: source.value, destination: destination.value, departureDate }))
+    dispatch(flightActions.searchFlightList({ source: source?.value, destination: destination?.value, departureDate }))
   }
 
   useOutsideClick(sortContainerRef, handleSort)
 
   return (
-    <S.FormContainer>
+    <S.FormContainer onSubmit={handleSearch}>
       <S.Source>
         <Dropdown
           label={'From'}
@@ -76,7 +76,6 @@ const FlightSearchForm = () => {
           type='submit'
           buttonText={'Search Flights'}
           disabled={false}
-          onClick={handleSearch}
         />
       </S.ButtonWrapper>
       <S.SortByWrapper ref={sortContainerRef} onClick={() => setSortOpen(true)}>

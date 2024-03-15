@@ -18,7 +18,7 @@ export const Wrapper = styled.div`
 
 export const FilterWrapper = styled.div`
   width: 25%;
-  margin: 0 20px 20px 20px;
+  margin: 0 0 20px 20px;
   height: 100%;
   overflow-y: scroll;
 `;
@@ -31,4 +31,16 @@ export const CardWrapper = styled.div`
   row-gap: 20px;
   height: 100%;
   overflow-y: scroll;
+
+  & > div:last-child {
+    margin-bottom: 20px;
+  }
+`;
+
+export const NoDataAvailable = styled.div`
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 `;

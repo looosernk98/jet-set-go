@@ -8,25 +8,29 @@ import RupeeIcon from '../../../assets/icons/rupee.svg'
 import planeIcon from '../../../assets/icons/plane.svg'
 import Button from '../../../atomic/button';
 import { DateFormatConverter } from '../../../utils/utils';
-import Tooltip from '../../../atomic/tooltip';
-import ChipsModal from '../../../atomic/chipsModal';
-import { Facilities } from '../../../constants/constants';
+// import Tooltip from '../../../atomic/tooltip';
+// import ChipsModal from '../../../atomic/chipsModal';
+// import { Facilities } from '../../../constants/constants';
+import { toast } from 'react-toastify';
 import * as S from './styles'
 
 const FlightCard = ({ flightDetails }) => {
+    const handleSelectFlight = () => {
+        toast.success('Ticket is booked Successfully')
+    }
     return (
         <S.Container>
             <S.CardRow>
-                <S.Detail>
-                    <S.DetailWrapper>
+                <S.CardLogoWrapper>
+                    <S.FlightLogoName>
                         <S.FlightIcon><img src={fligtIcon} alt='flight-icon' /></S.FlightIcon>
-                        <S.FlightName>{flightDetails?.airline}</S.FlightName>
-                    </S.DetailWrapper>
-                    <S.DetailWrapper>
                         <S.FlightNumber>{flightDetails?.flightNumber}</S.FlightNumber>
-                        <S.FlightClass> {flightDetails?.seatClass}</S.FlightClass>
-                    </S.DetailWrapper>
-                </S.Detail>
+                    </S.FlightLogoName>
+                    <S.FlightLogoName>
+                        <S.FlightName>{flightDetails?.airline}</S.FlightName>
+                        <S.FlightClass seatClass={flightDetails?.seatClass}> {flightDetails?.seatClass}</S.FlightClass>
+                    </S.FlightLogoName>
+                </S.CardLogoWrapper>
                 <S.Detail>
                     <S.DetailWrapper>
                         <S.DepartureTime>{DateFormatConverter(flightDetails?.departureTime)}</S.DepartureTime>
@@ -45,21 +49,21 @@ const FlightCard = ({ flightDetails }) => {
             <S.FlightInfo>
                 <S.Info><img src={seatIcon} alt='' /> {`${flightDetails?.seatsAvailable} seats available`}</S.Info>
                 <S.Info><img src={aircraftIcon} alt='' />{flightDetails?.aircraft}</S.Info>
-                <Tooltip
+                {/* <Tooltip
                     id={'facilities'}
                     position='bottom'
-                    htmlContent={<ChipsModal chips={Facilities} />}
-                >
+                    htmlContent={<ChipsModal chips={Facilities}/>}
+                > */}
                     <S.Info><img src={facilityIcon} alt='' />Facilities</S.Info>
-                </Tooltip>
+                {/* </Tooltip> */}
 
                 <S.Info><img src={gateIcon} alt='' />Gate: {`${flightDetails?.gate}`}</S.Info>
             </S.FlightInfo>
             <S.CardRow>
                 <S.Price><img src={RupeeIcon} alt='rupee-icon' /> {flightDetails?.price}</S.Price>
                 <Button
-                    buttonText={'Select Flight'}
-                    onClick={() => { }}
+                    buttonText={'Book Flight'}
+                    onClick={handleSelectFlight}
                 />
             </S.CardRow>
         </S.Container>

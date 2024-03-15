@@ -4,6 +4,7 @@ export const Container = styled.div`
   padding: 10px 20px;
   background: #fff;
   box-shadow: rgba(56, 84, 112, 0.3) 0px 2px 4px;
+  border-radius: 8px;
 `;
 
 export const CardRow = styled.div`

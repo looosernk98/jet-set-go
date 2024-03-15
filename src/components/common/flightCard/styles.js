@@ -21,7 +21,10 @@ export const FlightInfo = styled.div`
 export const FlightIcon = styled.div`
   width: 50px;
 `;
-export const FlightName = styled.h3``;
+export const FlightName = styled.h3`
+  position: relative;
+  top:10px;
+`;
 
 export const Detail = styled.div`
 `;
@@ -33,18 +36,47 @@ export const DetailWrapper = styled.div`
   justify-content: space-between;
 `;
 
+export const CardLogoWrapper = styled.div`
+  display: flex;
+  justify-content: space-between
+  align-items: center;
+  column-gap: 6px;
+`;
+
+export const FlightLogoName = styled.div`
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    gap: 8px;
+    height: 70px;
+`; 
+
 export const FlightClass = styled.div`
-  // green , orange
   color: #fff;
   font-size: 11px;
   font-weight: 700;
   border-radius: 4px;
-  background: #10c510;
   padding: 5px;
+  width: 62px;
+  text-align:center;
+
+  background: ${(p) => {
+    const seatClass = p.seatClass.toLowerCase();
+    if(seatClass === 'business'){
+      return '#10c510'
+    }else if(seatClass === 'private'){
+      return '#ffa529'
+    }else if(seatClass === 'economy'){
+       return '#44bdff'
+    }else{
+      return '#e363ee'
+    }
+  }};
 `;
 
 export const FlightNumber = styled.div`
   color: rgb(56, 84, 112);
+  width: 55px;
 `;
 export const DepartureTime = styled.h3``;
 export const MotionLine = styled.div`

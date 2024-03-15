@@ -9,19 +9,34 @@ import FlightCardLoader from '../common/skeleton-loaders/flightCardLoader'
 import * as S from './styles'
 
 const Dashboard = () => {
-    const [flights, setFlights] = useState();
+    const [flights, setFlights] = useState([]);
     const { flightList, loading } = useSelector(({ flightReducer }) => flightReducer);
 
     const dispatch = useDispatch();
-    
+
     useEffect(() => {
         dispatch(flightActions.getFlightList());
     }, [])
 
     useEffect(() => {
-        if (!flightList?.length) return;
         setFlights(flightList)
     }, [flightList])
+
+    if (loading) {
+
+    }
+
+    const renderCards = () => {
+        if (loading) {
+            return <FlightCardLoader />
+        } else if (!flights?.length) {
+            return <S.NoDataAvailable>No data available</S.NoDataAvailable>
+        } else {
+            return flights?.map((flight, index) => (
+                <FlightCard flightDetails={flight} key={index} />
+            ))
+        }
+    }
 
     return (
         <>
@@ -34,9 +49,7 @@ const Dashboard = () => {
                     <Filter />
                 </S.FilterWrapper>
                 <S.CardWrapper>
-                    {!loading ? flights?.map((flight, index) => (
-                        <FlightCard flightDetails={flight} key={index} />
-                    )) : <FlightCardLoader />}
+                    {renderCards()}
                 </S.CardWrapper>
             </S.Content>
         </>

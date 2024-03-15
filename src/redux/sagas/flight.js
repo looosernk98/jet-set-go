@@ -38,10 +38,9 @@ function* searchFlightList({ payload }) {
 }
 function* applyFilters({ payload }) {
   try {
-    const flightList = yield select(
-      ({ flightReducer }) => flightReducer.flightList
-    );
-    const filteredFlightList = filterFlights(flightList, payload);
+    const flightList = yield call(getApiData, API_END_POINTS.fetchFlights);
+    const modifiedFlightList = addSeatClassInResponse(flightList);
+    const filteredFlightList = filterFlights(modifiedFlightList, payload);
     yield put(flightActions.setFlightList(filteredFlightList));
   } catch (error) {
     yield put({
